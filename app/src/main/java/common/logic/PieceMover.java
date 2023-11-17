@@ -1,4 +1,4 @@
-package chess.logic.classicGame;
+package common.logic;
 
 import common.models.*;
 import common.moves.Move;

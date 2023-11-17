@@ -28,14 +28,14 @@ import java.util.List;
 
             List<Move> rookMovements = new ArrayList<>();
             rookMovements.add(new VerticalMove( true));
-            rookMovements.add(new HorizontalMove(false));
+            rookMovements.add(new HorizontalMove());
 
             List<Move> bishopMovements = new ArrayList<>();
             bishopMovements.add(new DiagonalMove());
 
             List<Move> queenMovements = new ArrayList<>();
             queenMovements.add(new VerticalMove( true));
-            queenMovements.add(new HorizontalMove(false));
+            queenMovements.add(new HorizontalMove());
             queenMovements.add(new DiagonalMove());
 
             List<Move> knightMovements = new ArrayList<>();
@@ -50,7 +50,7 @@ import java.util.List;
 
             List<Move> kingMovements = new ArrayList<>();
             kingMovements.add(new VerticalMove(1, true));
-            kingMovements.add(new HorizontalMove(1, false));
+            kingMovements.add(new HorizontalMove(1));
             kingMovements.add(new DiagonalMove(1, 1));
             kingMovements.add(new DiagonalMove(1, -1));
 

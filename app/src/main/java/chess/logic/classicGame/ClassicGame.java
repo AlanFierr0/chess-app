@@ -98,7 +98,7 @@ import java.util.List;
 
 
 
-            Board board = new Board(8, 8, blackPieces, whitePieces);
+            Board board = new Board(8, 8, blackPieces, whitePieces,pieceBuilder);
             return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
         }
     }

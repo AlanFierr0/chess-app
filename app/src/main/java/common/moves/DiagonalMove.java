@@ -21,7 +21,7 @@ public class DiagonalMove implements Move {
     public DiagonalMove() {
         this.rowsIncremented = 0;
         this.columnIncremented = 0 ;
-        this.backward = false;
+        this.backward = true;
     }
 
 

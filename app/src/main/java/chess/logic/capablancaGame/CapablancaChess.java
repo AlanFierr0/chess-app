@@ -1,5 +1,6 @@
 package chess.logic.capablancaGame;
 
+import chess.logic.classicGame.ClassicWinCondition;
 import chess.logic.moves.HorizontalMove;
 import chess.logic.moves.JumpMove;
 import chess.logic.moves.VerticalMove;
@@ -138,6 +139,6 @@ public class CapablancaChess {
 
 
         Board board = new Board(8, 10, blackPieces, whitePieces, pieceBuilder);
-        return new Game(player1, player2, board,SideColor.White, new FirstToEat());
+        return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
     }
 }

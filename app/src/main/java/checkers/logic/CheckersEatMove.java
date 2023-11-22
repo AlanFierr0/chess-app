@@ -25,7 +25,7 @@ public class CheckersEatMove implements Move {
         }
             if(checkColumn(initialSquare,finalSquare)) {
                 Coordinate resSquare = new Coordinate(finalSquare.column() + columnIncremented, resRow);
-                if (board.checkForPieceInSquare(resSquare) || !checkPiceInBoard(resSquare, board)) {
+                if (board.checkForPieceInSquare(resSquare) || !checkPieceInBoard(resSquare, board)) {
                     return new CheckResult<>(resSquare, false, "Jump Movement Failed");
                 }
                 return new CheckResult<>(resSquare, true, "Jump Movement Successful");
@@ -33,7 +33,7 @@ public class CheckersEatMove implements Move {
         return new CheckResult<>(finalSquare, false, "Jump Movement Failed");
     }
 
-    private boolean checkPiceInBoard(Coordinate resSquare, Board board) {
+    private boolean checkPieceInBoard(Coordinate resSquare, Board board) {
         int row = board.getRows();
         int column = board.getColumns();
         return resSquare.row() <= row && resSquare.row() > 0 && resSquare.column() <= column && resSquare.column() > 0;

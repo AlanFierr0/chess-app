@@ -27,16 +27,24 @@ public class PossibleMovements {
             for (int j = 1; j <= board.getRows(); j++) {
                 Coordinate finalSquare = new Coordinate(i, j);
                 if(eat) {
-                    if (!Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null"))
-                        if (CommonRule.checkRule(board,piece,finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult())
+                    if (isNotNull(board, finalSquare))
+                        if (followCheckMoveAndCommonMove(board, piece, initialSquare, move, finalSquare))
                             if(!checkDuplicated(possibleMoves, finalSquare))
                                 possibleMoves.add(finalSquare);
-                } else if (move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult()&& CommonRule.checkRule(board,piece,finalSquare)) {
+                } else if (followCheckMoveAndCommonMove(board, piece, initialSquare, move, finalSquare)) {
                     if(!checkDuplicated(possibleMoves, finalSquare))
                         possibleMoves.add(finalSquare);
                 }
             }
         }
+    }
+
+    private static boolean followCheckMoveAndCommonMove(Board board, Piece piece, Coordinate initialSquare, Move move, Coordinate finalSquare) {
+        return CommonRule.checkRule(board, piece, finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult();
+    }
+
+    private static boolean isNotNull(Board board, Coordinate finalSquare) {
+        return !Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null");
     }
 
     private Boolean checkDuplicated(List<Coordinate> possibleMoves, Coordinate finalSquare) {

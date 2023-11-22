@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class MoveValidation {
     public Boolean validateMove(Piece piece, Board board, Coordinate possibleMove, Coordinate initialSquare) {
-        if (Objects.equals(board.getSquare(possibleMove).getPiece().getName(), "null")) {
+        if (isNotNull(board, possibleMove)) {
             for (Move move : piece.getMovements()) {
                 if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && CommonRule.checkRule(board, piece, possibleMove)) {
                     return true;
@@ -23,5 +23,9 @@ public class MoveValidation {
             }
         }
         return false;
+    }
+
+    private static boolean isNotNull(Board board, Coordinate possibleMove) {
+        return Objects.equals(board.getSquare(possibleMove).getPiece().getName(), "null");
     }
 }

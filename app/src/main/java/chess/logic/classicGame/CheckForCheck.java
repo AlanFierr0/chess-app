@@ -28,10 +28,14 @@ public class CheckForCheck {
         if (board.getSquareOfPiece(piece).successfulResult().isEmpty())
             return false;
         for (Move move : piece.getEatMovements()) {
-            if (move.checkMove(board.getSquareOfPiece(piece).successfulResult().get(), toPosition, board, piece.getColor()).outputResult()) {
+            if (checkIfPossible(piece, toPosition, board, move)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private Boolean checkIfPossible(Piece piece, Coordinate toPosition, Board board, Move move) {
+        return move.checkMove(board.getSquareOfPiece(piece).successfulResult().get(), toPosition, board, piece.getColor()).outputResult();
     }
 }

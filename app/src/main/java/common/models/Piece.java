@@ -39,14 +39,22 @@ public class Piece{
     }
 
     public MoveResults<Board, Boolean> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, CheckLegalMove checkLegalMove) {
-        if (!CommonRule.checkRule(board, this, toSquare)) {
+        if (notFollowsCommonRule(toSquare, board)) {
             return new MoveResults<>(board, true, "Common Rule unfollowed");
         }
-        if (!Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null")) {
+        if (isNotNull(toSquare, board)) {
             return checkLegalMove.check(this,toSquare, board, initial, eatMovements,winCondition);
         } else {
             return checkLegalMove.check(this,toSquare, board, initial, movements,winCondition);
         }
+    }
+
+    private static boolean isNotNull(Coordinate toSquare, Board board) {
+        return !Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null");
+    }
+
+    private boolean notFollowsCommonRule(Coordinate toSquare, Board board) {
+        return !CommonRule.checkRule(board, this, toSquare);
     }
 
     public String getName() {

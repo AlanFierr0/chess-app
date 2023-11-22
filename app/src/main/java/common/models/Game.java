@@ -42,7 +42,7 @@ public class Game {
 
     public MoveResults<Board,Boolean> movePiece(Coordinate initial, Coordinate toSquare, Player currentPlayer) {
         Piece piece = boardStack.peek().getSquare(initial).getPiece();
-        if (Objects.equals(piece.getName(), "null")) {
+        if (isNotNull(piece)) {
             return new MoveResults<>(boardStack.peek(), true, "Piece not found");
         }
         if(piece.getColor().equals(currentPlayer.getColor())) {
@@ -57,6 +57,10 @@ public class Game {
         else{
             return new MoveResults<>(boardStack.peek(), true, "Piece not same color as player");
         }
+    }
+
+    private static boolean isNotNull(Piece piece) {
+        return Objects.equals(piece.getName(), "null");
     }
 
 

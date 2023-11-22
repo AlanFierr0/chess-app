@@ -1,6 +1,5 @@
 package chess.logic.capablancaGame;
 
-import chess.logic.classicGame.ClassicWinCondition;
 import chess.logic.moves.HorizontalMove;
 import chess.logic.moves.JumpMove;
 import chess.logic.moves.VerticalMove;
@@ -24,8 +23,8 @@ public class CapablancaChess {
         pawnMovements.add(new VerticalMove(2, false));
 
         List<Move> pawnEatMoves = new ArrayList<>();
-        pawnEatMoves.add(new DiagonalMove(1, -1));
-        pawnEatMoves.add(new DiagonalMove(1, 1));
+        pawnEatMoves.add(new DiagonalMove(1, -1, false));
+        pawnEatMoves.add(new DiagonalMove(1, 1, false));
 
         List<Move> rookMovements = new ArrayList<>();
         rookMovements.add(new VerticalMove( true));
@@ -52,8 +51,8 @@ public class CapablancaChess {
         List<Move> kingMovements = new ArrayList<>();
         kingMovements.add(new VerticalMove(1, true));
         kingMovements.add(new HorizontalMove(1));
-        kingMovements.add(new DiagonalMove(1, 1));
-        kingMovements.add(new DiagonalMove(1, -1));
+        kingMovements.add(new DiagonalMove(1, 1,false));
+        kingMovements.add(new DiagonalMove(1, -1,true));
 
         List<Move> chancellorMovements = new ArrayList<>();
         chancellorMovements.add(new JumpMove(2, 1));
@@ -139,6 +138,6 @@ public class CapablancaChess {
 
 
         Board board = new Board(8, 10, blackPieces, whitePieces, pieceBuilder);
-        return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
+        return new Game(player1, player2, board,SideColor.White, new FirstToEat());
     }
 }

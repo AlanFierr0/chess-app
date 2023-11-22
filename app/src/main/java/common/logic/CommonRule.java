@@ -1,4 +1,4 @@
-package chess.logic;
+package common.logic;
 
 
 import common.models.Coordinate;

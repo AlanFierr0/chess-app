@@ -29,7 +29,6 @@ public class Game {
     }
 
     public void setGame() {
-        System.out.println("Game Started");
         Random rand = new Random();
         int randomNum = rand.nextInt(2);
         if (randomNum == 0) {

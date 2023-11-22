@@ -1,6 +1,6 @@
 package checkers.logic;
 
-import chess.logic.PossibleMovements;
+import common.logic.PossibleMovements;
 import common.models.Board;
 import common.models.Coordinate;
 import common.models.Piece;

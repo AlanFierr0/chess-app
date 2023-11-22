@@ -1,5 +1,6 @@
-package chess.logic;
+package common.logic;
 
+import common.logic.CommonRule;
 import common.models.Board;
 import common.models.Coordinate;
 import common.moves.Move;

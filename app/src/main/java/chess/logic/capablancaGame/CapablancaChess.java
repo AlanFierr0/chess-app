@@ -17,7 +17,7 @@ public class CapablancaChess {
         Player player2 = new Player();
         List<Piece> blackPieces = new ArrayList<>();
         List<Piece> whitePieces = new ArrayList<>();
-        PieceBuilder pieceBuilder = new PieceBuilder();
+        PieceFactory pieceFactory = new PieceFactory();
 
         List<Move> pawnMovements = new ArrayList<>();
         pawnMovements.add(new VerticalMove(1, false));
@@ -80,65 +80,65 @@ public class CapablancaChess {
 
 
 
-        whitePieces.add(pieceBuilder.createPiece("pawn", new Coordinate(1, 2), pawnMovements, pawnEatMoves, false, SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(2, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(3, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(4, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(5, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(6, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(7, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(8, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(9, 2), SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(10, 2), SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("pawn", new Coordinate(1, 2), pawnMovements, pawnEatMoves, false, SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(2, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(3, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(4, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(6, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(7, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(8, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(9, 2), SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(10, 2), SideColor.White));
 
-        whitePieces.add(pieceBuilder.createPiece("rook", new Coordinate(1, 1), rookMovements, false, SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("rook", new Coordinate(10, 1), SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("rook", new Coordinate(1, 1), rookMovements, false, SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("rook", new Coordinate(10, 1), SideColor.White));
 
-        whitePieces.add(pieceBuilder.createPiece("bishop", new Coordinate(4, 1), bishopMovements, false, SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("bishop", new Coordinate(7, 1), SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("bishop", new Coordinate(4, 1), bishopMovements, false, SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("bishop", new Coordinate(7, 1), SideColor.White));
 
-        whitePieces.add(pieceBuilder.createPiece("knight", new Coordinate(2, 1), knightMovements, false, SideColor.White));
-        whitePieces.add(pieceBuilder.clonePiece("knight", new Coordinate(9, 1), SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("knight", new Coordinate(2, 1), knightMovements, false, SideColor.White));
+        whitePieces.add(pieceFactory.clonePiece("knight", new Coordinate(9, 1), SideColor.White));
 
-        whitePieces.add(pieceBuilder.createPiece("queen", new Coordinate(5, 1), queenMovements, false, SideColor.White));
-        whitePieces.add(pieceBuilder.createPiece("king", new Coordinate(6, 1), kingMovements, true, SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("queen", new Coordinate(5, 1), queenMovements, false, SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("king", new Coordinate(6, 1), kingMovements, true, SideColor.White));
 
-        whitePieces.add(pieceBuilder.createPiece("chancellor", new Coordinate(3, 1), chancellorMovements, false, SideColor.White));
-        whitePieces.add(pieceBuilder.createPiece("archbishop", new Coordinate(8, 1), archBishopMovements, false, SideColor.White));
-
-
+        whitePieces.add(pieceFactory.createPiece("chancellor", new Coordinate(3, 1), chancellorMovements, false, SideColor.White));
+        whitePieces.add(pieceFactory.createPiece("archbishop", new Coordinate(8, 1), archBishopMovements, false, SideColor.White));
 
 
 
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(1, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(2, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(3, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(4, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(5, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(6, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(7, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(8, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(9, 7), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("pawn", new Coordinate(10, 7), SideColor.Black));
-
-        blackPieces.add(pieceBuilder.clonePiece("rook", new Coordinate(1, 8), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("rook", new Coordinate(10, 8), SideColor.Black));
-
-        blackPieces.add(pieceBuilder.clonePiece("bishop", new Coordinate(4, 8), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("bishop", new Coordinate(7, 8), SideColor.Black));
-
-        blackPieces.add(pieceBuilder.clonePiece("knight", new Coordinate(2, 8), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("knight", new Coordinate(9, 8), SideColor.Black));
-
-        blackPieces.add(pieceBuilder.clonePiece("queen", new Coordinate(5, 8), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("king", new Coordinate(6, 8), SideColor.Black));
-
-        blackPieces.add(pieceBuilder.clonePiece("chancellor", new Coordinate(3, 8), SideColor.Black));
-        blackPieces.add(pieceBuilder.clonePiece("archbishop", new Coordinate(8, 8), SideColor.Black));
 
 
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(1, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(2, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(3, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(4, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(6, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(7, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(8, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(9, 7), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(10, 7), SideColor.Black));
 
-        Board board = new Board(8, 10, blackPieces, whitePieces, pieceBuilder);
+        blackPieces.add(pieceFactory.clonePiece("rook", new Coordinate(1, 8), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("rook", new Coordinate(10, 8), SideColor.Black));
+
+        blackPieces.add(pieceFactory.clonePiece("bishop", new Coordinate(4, 8), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("bishop", new Coordinate(7, 8), SideColor.Black));
+
+        blackPieces.add(pieceFactory.clonePiece("knight", new Coordinate(2, 8), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("knight", new Coordinate(9, 8), SideColor.Black));
+
+        blackPieces.add(pieceFactory.clonePiece("queen", new Coordinate(5, 8), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("king", new Coordinate(6, 8), SideColor.Black));
+
+        blackPieces.add(pieceFactory.clonePiece("chancellor", new Coordinate(3, 8), SideColor.Black));
+        blackPieces.add(pieceFactory.clonePiece("archbishop", new Coordinate(8, 8), SideColor.Black));
+
+
+
+        Board board = new Board(8, 10, blackPieces, whitePieces, pieceFactory);
         return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
     }
 }

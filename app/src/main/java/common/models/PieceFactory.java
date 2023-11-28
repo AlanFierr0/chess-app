@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PieceBuilder {
+public class PieceFactory {
     private int id = 1;
     private List<Move> movements;
     private List<Move> eatMovements;

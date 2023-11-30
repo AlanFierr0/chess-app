@@ -47,7 +47,7 @@ public class CheckersEatMove implements Move {
         int direction = finalSquare.column() - initialSquare.column();
         int sign1 = Integer.signum(direction);
         int sign2 = Integer.signum(columnIncremented);
-        return sign1 == sign2;
+        return sign1 == sign2 && Math.abs(direction) == Math.abs(columnIncremented);
     }
     private Boolean checkSide(SideColor color) {
         return color == SideColor.White;

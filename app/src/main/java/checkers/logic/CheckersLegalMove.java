@@ -7,6 +7,7 @@ import common.logic.WinCondition;
 import common.models.Board;
 import common.models.Coordinate;
 import common.models.Piece;
+import common.models.SideColor;
 import common.moves.Move;
 import common.results.MoveResult;
 
@@ -18,23 +19,33 @@ public class CheckersLegalMove implements LegalMove {
     private final PossibleMovements possibleMovements = new PossibleMovements();
 
     @Override
-    public MoveResult<Board, Boolean> movePiece(Piece piece, Coordinate toSquare, Board board, Coordinate initial, List<Move> moves, WinCondition winCondition) {
+    public MoveResult<Board, Boolean, SideColor> movePiece(Piece piece, Coordinate toSquare, Board board, Coordinate initial, List<Move> moves, WinCondition winCondition) {
         return loopUntilCantEat(piece, toSquare, board, initial, moves, winCondition);
     }
 
-    private MoveResult<Board, Boolean> loopUntilCantEat(Piece piece, Coordinate toSquare, Board board, Coordinate initial, List<Move> moves, WinCondition winCondition) {
+    private MoveResult<Board, Boolean, SideColor> loopUntilCantEat(Piece piece, Coordinate toSquare, Board board, Coordinate initial, List<Move> moves, WinCondition winCondition) {
         if (canEatRule(piece, board, toSquare)) {
-            return new MoveResult<>(board, true, "always eat Rule unfollowed");
+            return new MoveResult<>(board, true,piece.getColor(), "always eat Rule unfollowed");
         }
-        MoveResult<Board, Boolean> move = pieceMover.check(board, initial, toSquare, moves, piece, board.getSquare(toSquare).getPiece());
+        MoveResult<Board, Boolean, SideColor> move = pieceMover.check(board, initial, toSquare, moves, piece, board.getSquare(toSquare).getPiece());
         if (move.errorResult())
             return move;
         else {
-            if (canContinueToEat(piece,move.successfulResult(),toSquare) != toSquare)
-                return loopUntilCantEat(piece, canContinueToEat(piece,move.successfulResult(),toSquare), move.successfulResult(), move.successfulResult().getSquareOfPiece(piece).successfulResult().get(), moves, winCondition);
-
-            return winCondition.checkWin(board, piece, move, toSquare);
+            if (canContinueToEat(piece,move.successfulResult(),toSquare) != toSquare && hasEaten(piece,toSquare,board))
+                return winCondition.checkWin(board, piece,  new MoveResult<>(move.successfulResult(), false, piece.getColor(), "Piece Moved"), toSquare);
+            else
+                return winCondition.checkWin(board, piece, move, toSquare);
         }
+    }
+
+    private boolean hasEaten(Piece piece,Coordinate toSquare, Board board) {
+        SideColor color = board.getSquare(toSquare).getPiece().getColor();
+        if (color == SideColor.Black)
+            return piece.getColor() == SideColor.White;
+        else if (color == SideColor.White)
+            return piece.getColor() == SideColor.Black;
+        else
+            return false;
     }
 
     private Coordinate canContinueToEat(Piece piece, Board board, Coordinate toSquare) {

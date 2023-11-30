@@ -38,9 +38,9 @@ public class Piece{
         this.id = id;
     }
 
-    public MoveResult<Board, Boolean> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, LegalMove LegalMove) {
+    public MoveResult<Board, Boolean, SideColor> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, LegalMove LegalMove) {
         if (notFollowsCommonRule(toSquare, board)) {
-            return new MoveResult<>(board, true, "Common Rule unfollowed");
+            return new MoveResult<>(board, true,color, "Common Rule unfollowed");
         }
         if (isNotNull(toSquare, board)) {
             return LegalMove.movePiece(this,toSquare, board, initial, eatMovements,winCondition);

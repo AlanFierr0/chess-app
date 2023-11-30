@@ -40,22 +40,22 @@ public class Game {
         }
     }
 
-    public MoveResult<Board,Boolean> movePiece(Coordinate initial, Coordinate toSquare, Player currentPlayer) {
+    public MoveResult<Board,Boolean,SideColor> movePiece(Coordinate initial, Coordinate toSquare, Player currentPlayer) {
         Piece piece = boardStack.peek().getSquare(initial).getPiece();
         if (isNotNull(piece)) {
-            return new MoveResult<>(boardStack.peek(), true, "Piece not found");
+            return new MoveResult<>(boardStack.peek(), true,currentPlayer.getColor(), "Piece not found");
         }
         if(piece.getColor().equals(currentPlayer.getColor())) {
-            MoveResult<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition, legalMove);
+            MoveResult<Board,Boolean,SideColor> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition, legalMove);
             if (res.errorResult()) {
-                return new MoveResult<>(boardStack.peek(), true, res.message());
+                return new MoveResult<>(boardStack.peek(), true, currentPlayer.getColor(), res.message());
             }
-            turnHandler = turnHandler.nextTurn();
+            turnHandler = turnHandler.setTurn(res.nextTurn());
             boardStack.push(res.successfulResult());
-            return new MoveResult<>(boardStack.peek(), false, res.message());
+            return new MoveResult<>(boardStack.peek(), false,res.nextTurn(), res.message());
         }
         else{
-            return new MoveResult<>(boardStack.peek(), true, "Piece not same color as player");
+            return new MoveResult<>(boardStack.peek(), true, currentPlayer.getColor(),"Piece not same color as player");
         }
     }
 

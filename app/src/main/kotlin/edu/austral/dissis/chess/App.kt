@@ -4,6 +4,7 @@
 package edu.austral.dissis.chess
 
 import checkers.logic.CheckersGame
+import chess.logic.classicGame.ClassicGame
 //import chess.logic.capablancaGame.CapablancaChess
 //import chess.logic.classicGame.ClassicGame
 import common.adapter.DefaultGameEngine

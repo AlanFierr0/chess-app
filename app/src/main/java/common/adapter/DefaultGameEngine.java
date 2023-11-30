@@ -2,6 +2,7 @@ package common.adapter;
 import common.models.Board;
 import common.models.Coordinate;
 import common.models.Game;
+import common.models.SideColor;
 import common.results.MoveResult;
 import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +22,7 @@ public class DefaultGameEngine implements GameEngine {
         Coordinate initialCoordinate = Adapter.convertPositionToCoordinate(initialPosition);
         Coordinate finalCoordinate = Adapter.convertPositionToCoordinate(finalPosition);
 
-        MoveResult<Board,Boolean> moveResult = game.movePiece(initialCoordinate,finalCoordinate,game.getCurrentPlayer());
+        MoveResult<Board,Boolean, SideColor> moveResult = game.movePiece(initialCoordinate,finalCoordinate,game.getCurrentPlayer());
         if (moveResult.errorResult()) {
             if (moveResult.message().equals("CheckMate")) {
                 return new GameOver(Adapter.convertPlayerColor(game.getTurnHandler().turn()));

@@ -40,7 +40,7 @@ public class CheckersGame {
         whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(3, 3), SideColor.White));
         whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5, 3), SideColor.White));
         whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(7, 3), SideColor.White));
-        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5,5), SideColor.White));
+//        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5,5), SideColor.White));
 
         blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(2, 6), SideColor.Black));
         blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(4, 6), SideColor.Black));

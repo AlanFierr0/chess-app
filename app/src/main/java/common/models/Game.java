@@ -59,7 +59,7 @@ public class Game {
         }
     }
 
-    private static boolean isNotNull(Piece piece) {
+    private boolean isNotNull(Piece piece) {
         return Objects.equals(piece.getName(), "null");
     }
 

@@ -1,10 +1,10 @@
 package common.models;
 
 import common.logic.CommonRule;
-import common.logic.CheckLegalMove;
+import common.logic.LegalMove;
 import common.logic.WinCondition;
 import common.moves.Move;
-import common.results.MoveResults;
+import common.results.MoveResult;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,23 +38,24 @@ public class Piece{
         this.id = id;
     }
 
-    public MoveResults<Board, Boolean> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, CheckLegalMove checkLegalMove) {
+    public MoveResult<Board, Boolean> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, LegalMove LegalMove) {
         if (notFollowsCommonRule(toSquare, board)) {
-            return new MoveResults<>(board, true, "Common Rule unfollowed");
+            return new MoveResult<>(board, true, "Common Rule unfollowed");
         }
         if (isNotNull(toSquare, board)) {
-            return checkLegalMove.check(this,toSquare, board, initial, eatMovements,winCondition);
+            return LegalMove.movePiece(this,toSquare, board, initial, eatMovements,winCondition);
         } else {
-            return checkLegalMove.check(this,toSquare, board, initial, movements,winCondition);
+            return LegalMove.movePiece(this,toSquare, board, initial, movements,winCondition);
         }
     }
 
-    private static boolean isNotNull(Coordinate toSquare, Board board) {
+    private boolean isNotNull(Coordinate toSquare, Board board) {
         return !Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null");
     }
 
     private boolean notFollowsCommonRule(Coordinate toSquare, Board board) {
-        return !CommonRule.checkRule(board, this, toSquare);
+        CommonRule commonRule = new CommonRule();
+        return !commonRule.checkRule(board, this, toSquare);
     }
 
     public String getName() {

@@ -1,8 +1,8 @@
 package common.models;
 
-import common.logic.CheckLegalMove;
+import common.logic.LegalMove;
 import common.logic.WinCondition;
-import common.results.MoveResults;
+import common.results.MoveResult;
 
 
 import java.util.Objects;
@@ -15,16 +15,16 @@ public class Game {
     private final Stack<Board> boardStack = new Stack<>();
     private TurnHandler turnHandler;
     private final WinCondition winCondition;
-    private final CheckLegalMove checkLegalMove;
+    private final LegalMove legalMove;
 
 
-    public Game(Player player1, Player player2, Board board, SideColor startingPlayer, WinCondition winCondition) {
+    public Game(Player player1, Player player2, Board board, SideColor startingPlayer, WinCondition winCondition, LegalMove legalMove) {
         this.player1 = player1;
         this.player2 = player2;
         this.boardStack.push(board);
         this.turnHandler = new TurnHandler(startingPlayer);
         this.winCondition = winCondition;
-        this.checkLegalMove = new CheckLegalMove();
+        this.legalMove = legalMove;
         setGame();
     }
 
@@ -40,22 +40,22 @@ public class Game {
         }
     }
 
-    public MoveResults<Board,Boolean> movePiece(Coordinate initial, Coordinate toSquare, Player currentPlayer) {
+    public MoveResult<Board,Boolean> movePiece(Coordinate initial, Coordinate toSquare, Player currentPlayer) {
         Piece piece = boardStack.peek().getSquare(initial).getPiece();
         if (isNotNull(piece)) {
-            return new MoveResults<>(boardStack.peek(), true, "Piece not found");
+            return new MoveResult<>(boardStack.peek(), true, "Piece not found");
         }
         if(piece.getColor().equals(currentPlayer.getColor())) {
-            MoveResults<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition,checkLegalMove);
+            MoveResult<Board, Boolean> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition, legalMove);
             if (res.errorResult()) {
-                return new MoveResults<>(boardStack.peek(), true, res.message());
+                return new MoveResult<>(boardStack.peek(), true, res.message());
             }
             turnHandler = turnHandler.nextTurn();
             boardStack.push(res.successfulResult());
-            return new MoveResults<>(boardStack.peek(), false, res.message());
+            return new MoveResult<>(boardStack.peek(), false, res.message());
         }
         else{
-            return new MoveResults<>(boardStack.peek(), true, "Piece not same color as player");
+            return new MoveResult<>(boardStack.peek(), true, "Piece not same color as player");
         }
     }
 

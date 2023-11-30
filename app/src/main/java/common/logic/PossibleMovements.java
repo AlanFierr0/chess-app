@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PossibleMovements {
+    private final CommonRule commonRule = new CommonRule();
     public List<Coordinate> getPossibleMovements(Board board,Piece piece, Coordinate initialSquare) {
         List<Coordinate> possibleMoves = new ArrayList<>();
         for (Move move : piece.getEatMovements()) {
@@ -39,11 +40,11 @@ public class PossibleMovements {
         }
     }
 
-    private static boolean followCheckMoveAndCommonMove(Board board, Piece piece, Coordinate initialSquare, Move move, Coordinate finalSquare) {
-        return CommonRule.checkRule(board, piece, finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult();
+    private boolean followCheckMoveAndCommonMove(Board board, Piece piece, Coordinate initialSquare, Move move, Coordinate finalSquare) {
+        return commonRule.checkRule(board, piece, finalSquare) && move.checkMove(initialSquare, finalSquare, board, piece.getColor()).outputResult();
     }
 
-    private static boolean isNotNull(Board board, Coordinate finalSquare) {
+    private boolean isNotNull(Board board, Coordinate finalSquare) {
         return !Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null");
     }
 

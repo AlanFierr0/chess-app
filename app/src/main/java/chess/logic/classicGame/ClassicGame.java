@@ -27,14 +27,14 @@ import java.util.List;
             pawnEatMoves.add(new DiagonalMove(1, 1,false));
 
             List<Move> rookMovements = new ArrayList<>();
-            rookMovements.add(new VerticalMove( true));
+            rookMovements.add(new VerticalMove(true));
             rookMovements.add(new HorizontalMove());
 
             List<Move> bishopMovements = new ArrayList<>();
             bishopMovements.add(new DiagonalMove());
 
             List<Move> queenMovements = new ArrayList<>();
-            queenMovements.add(new VerticalMove( true));
+            queenMovements.add(new VerticalMove(true));
             queenMovements.add(new HorizontalMove());
             queenMovements.add(new DiagonalMove());
 
@@ -99,7 +99,7 @@ import java.util.List;
 
 
             Board board = new Board(8, 8, blackPieces, whitePieces, pieceFactory);
-            return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
+            return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition(), new ChessLegalMove());
         }
     }
 

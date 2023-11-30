@@ -50,7 +50,7 @@ public class CheckersGame {
         blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(8, 8), SideColor.Black));
 
         Board board= new Board(8, 8,blackPieces,whitePieces, pieceFactory);
-        return new Game(player1, player2,board, SideColor.Black, new CheckersWinCondition());
+        return new Game(player1, player2,board, SideColor.Black, new CheckersWinCondition(), new CheckersLegalMove());
     }
 
 }

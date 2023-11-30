@@ -1,5 +1,6 @@
 package chess.logic.capablancaGame;
 
+import chess.logic.classicGame.ChessLegalMove;
 import chess.logic.classicGame.ClassicWinCondition;
 import chess.logic.moves.HorizontalMove;
 import chess.logic.moves.JumpMove;

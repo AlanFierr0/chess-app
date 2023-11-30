@@ -8,16 +8,17 @@ import common.models.Piece;
 import java.util.Objects;
 
 public class MoveValidation {
+    private final CommonRule commonRule = new CommonRule();
     public Boolean validateMove(Piece piece, Board board, Coordinate possibleMove, Coordinate initialSquare) {
         if (isNotNull(board, possibleMove)) {
             for (Move move : piece.getMovements()) {
-                if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && CommonRule.checkRule(board, piece, possibleMove)) {
+                if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && commonRule.checkRule(board, piece, possibleMove)) {
                     return true;
                 }
             }
         } else {
             for (Move move : piece.getEatMovements()) {
-                if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && CommonRule.checkRule(board, piece, possibleMove)) {
+                if (move.checkMove(initialSquare, possibleMove, board, piece.getColor()).outputResult() && commonRule.checkRule(board, piece, possibleMove)) {
                     return true;
                 }
             }

@@ -3,14 +3,14 @@ package common.logic;
 import common.models.*;
 import common.moves.Move;
 import common.results.CheckResult;
-import common.results.MoveResults;
+import common.results.MoveResult;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PieceMover {
-    public MoveResults<Board,Boolean> check(Board board, Coordinate initial, Coordinate toSquare, List<Move> movements, Piece pieceMoving, Piece pieceEaten){
+    public MoveResult<Board,Boolean> check(Board board, Coordinate initial, Coordinate toSquare, List<Move> movements, Piece pieceMoving, Piece pieceEaten){
         for (Move move : movements) {
             CheckResult<Coordinate,Boolean> checkResult = move.checkMove(initial, toSquare, board, pieceMoving.getColor());
             if (checkResult.outputResult()) {
@@ -23,9 +23,9 @@ public class PieceMover {
                 newMovement.add(movement);
 
                 Board boa = new Board(board.getRows(), board.getColumns(), newBoard2.getPieces(), newBoard2.getSquares(), newMovement, board.getPieceBuilder());
-                return new MoveResults<>(boa, false, "Piece Moved");
+                return new MoveResult<>(boa, false, "Piece Moved");
             }
         }
-        return new MoveResults<>(board, true, "Piece not moved");
+        return new MoveResult<>(board, true, "Piece not moved");
     }
 }

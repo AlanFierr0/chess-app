@@ -20,8 +20,12 @@ public class CheckersEatMove implements Move {
         int resRow;
         if (checkSide(color)){
             resRow = finalSquare.row() + rowsIncremented;
+            if (finalSquare.row() - initialSquare.row() != rowsIncremented)
+                return new CheckResult<>(finalSquare, false, "Jump Movement Failed");
         } else {
             resRow = finalSquare.row() - rowsIncremented;
+            if (finalSquare.row() - initialSquare.row() != -rowsIncremented)
+                return new CheckResult<>(finalSquare, false, "Jump Movement Failed");
         }
             if(checkColumn(initialSquare,finalSquare)) {
                 Coordinate resSquare = new Coordinate(finalSquare.column() + columnIncremented, resRow);

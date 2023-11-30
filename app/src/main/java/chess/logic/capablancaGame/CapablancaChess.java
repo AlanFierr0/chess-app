@@ -140,6 +140,6 @@ public class CapablancaChess {
 
 
         Board board = new Board(8, 10, blackPieces, whitePieces, pieceFactory);
-        return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition());
+        return new Game(player1, player2, board,SideColor.White, new ClassicWinCondition(), new ChessLegalMove());
     }
 }

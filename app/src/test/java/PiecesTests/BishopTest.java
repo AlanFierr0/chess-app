@@ -41,13 +41,13 @@ public class BishopTest {
 
     @Test
     void testValidDiagonalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 6), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 6));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testInvalidDiagonalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 5), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 5));
         assertEquals("Piece not moved", result.message());
     }
 }

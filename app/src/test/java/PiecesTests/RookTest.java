@@ -42,19 +42,19 @@ public class RookTest {
 
     @Test
     void testValidHorizontalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 2), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 2));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testValidVerticalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 5), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 5));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testInvalidDiagonalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 6), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(5, 6));
         assertEquals("Piece not moved", result.message());
     }
 }

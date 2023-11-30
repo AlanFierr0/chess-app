@@ -35,25 +35,25 @@ public class KingTest {
 
     @Test
     void testValidVerticalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(5, 1), new Coordinate(5, 2), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(5, 1), new Coordinate(5, 2));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testValidHorizontalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 1), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 1));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testValidDiagonalMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 2), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 2));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testInvalidMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(5, 1), new Coordinate(7, 2), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(5, 1), new Coordinate(7, 2));
         assertEquals("Piece not moved", result.message());
     }
 }

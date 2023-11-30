@@ -54,13 +54,13 @@ public class KnightTest {
 
     @Test
     void testValidJumpMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(4, 4), new Coordinate(6, 5), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(4, 4), new Coordinate(6, 5));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testInvalidJumpMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(4, 4), new Coordinate(6, 6), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(4, 4), new Coordinate(6, 6));
         assertEquals("Piece not moved", result.message());
     }
 

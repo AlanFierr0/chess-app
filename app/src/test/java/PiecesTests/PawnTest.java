@@ -46,23 +46,23 @@ public class PawnTest {
     }
     @Test
     void TestIfPawnCanMoveDiagonalWithoutEating() {
-        MoveResult<Board, Boolean> g = game.movePiece(new Coordinate(1, 2), new Coordinate(2, 3), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> g = game.movePiece(new Coordinate(1, 2), new Coordinate(2, 3));
         assertEquals("Piece not moved", g.message());
     }
     @Test
     void TestIfPawnCanMoveDiagonalWithEating() {
-        MoveResult<Board, Boolean> g = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 2), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> g = game.movePiece(new Coordinate(5, 1), new Coordinate(6, 2));
         assertEquals("Piece Moved", g.message());
     }
     @Test
     void testValidForwardMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 3), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 3));
         assertEquals("Piece Moved", result.message());
     }
 
     @Test
     void testInvalidBackwardMove() {
-        MoveResult<Board, Boolean> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 1), game.getCurrentPlayer());
+        MoveResult<Board, Boolean,SideColor> result = game.movePiece(new Coordinate(1, 2), new Coordinate(1, 1));
         assertEquals("Piece not moved", result.message());
     }
 }

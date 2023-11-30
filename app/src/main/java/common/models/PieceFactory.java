@@ -50,4 +50,15 @@ public class PieceFactory {
         return new Piece("null", coordinate, new ArrayList<>(), new ArrayList<>(), SideColor.NULL, false, id);
      }
 
+    public Piece promotePawn(Coordinate toSquare, SideColor color, int id) {
+        for (Piece piece : pieces) {
+            if (piece.getName().equals("queen")){
+                this.movements = piece.getMovements();
+                this.eatMovements = piece.getEatMovements();
+                this.isImportant = piece.isImportant();
+                return new Piece("queen", toSquare, movements, eatMovements, color, isImportant, id);
+            }
+        }
+        return null;
+    }
 }

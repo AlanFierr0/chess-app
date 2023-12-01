@@ -12,7 +12,8 @@ import java.util.List;
 public class CheckForCheckMate {
         private final MoveValidation moveValidation = new MoveValidation();
         private final PossibleMovements possibleMovements = new PossibleMovements();
-        public Boolean check(Board board, SideColor color, List<Piece> pieces, CheckForCheck checkForCheck){
+        private final CheckForCheck checkForCheck = new CheckForCheck();
+        public Boolean check(Board board, SideColor color, List<Piece> pieces){
             SideColor oppositeColor = color == SideColor.White ? SideColor.Black : SideColor.White;
             for (Piece piece : pieces) {
                 if (piece.getColor() == oppositeColor) {

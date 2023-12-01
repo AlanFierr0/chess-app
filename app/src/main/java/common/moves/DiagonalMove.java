@@ -29,7 +29,7 @@ public class DiagonalMove implements Move {
     @Override
     public CheckResult<Coordinate,Boolean> checkMove(Coordinate initialSquare, Coordinate finalSquare, Board board, SideColor color) {
 
-        if (Math.abs(finalSquare.column() - initialSquare.column()) != Math.abs(finalSquare.row() - initialSquare.row()))
+        if (isNotMovingSameAmmountHorizontalAndVertical(initialSquare, finalSquare))
             return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
         else if (isGoingBackwardsIllegally(initialSquare, finalSquare, color)) {
             return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
@@ -38,12 +38,20 @@ public class DiagonalMove implements Move {
         columnTemp = checkColumnTemp(initialSquare, finalSquare);
         checkForDirection(initialSquare, finalSquare);
         if(isDiagonalClear(board,initialSquare, finalSquare))
-            if (finalSquare.column() == initialSquare.column() + columnTemp  && finalSquare.row() == initialSquare.row() + rowTemp ){
+            if (isMovingCorrectAmmount(initialSquare, finalSquare)){
                 return new CheckResult<>(finalSquare, true,"Diagonal Movement Successful");
             } else {
                 return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
             }
         return new CheckResult<>(finalSquare, false,"Diagonal Movement Failed");
+    }
+
+    private boolean isMovingCorrectAmmount(Coordinate initialSquare, Coordinate finalSquare) {
+        return finalSquare.column() == initialSquare.column() + columnTemp && finalSquare.row() == initialSquare.row() + rowTemp;
+    }
+
+    private static boolean isNotMovingSameAmmountHorizontalAndVertical(Coordinate initialSquare, Coordinate finalSquare) {
+        return Math.abs(finalSquare.column() - initialSquare.column()) != Math.abs(finalSquare.row() - initialSquare.row());
     }
 
     private boolean isGoingBackwardsIllegally(Coordinate initialSquare, Coordinate finalSquare, SideColor color) {

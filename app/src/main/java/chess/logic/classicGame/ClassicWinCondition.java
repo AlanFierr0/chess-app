@@ -9,15 +9,12 @@ import common.results.MoveResult;
 
 
 public class ClassicWinCondition implements WinCondition {
-    private final CheckForCheck checkForCheck = new CheckForCheck();
     private final CheckForCheckMate checkForCheckMate  = new CheckForCheckMate();
     @Override
     public MoveResult<Board,Boolean, SideColor> checkWin(Board board, Piece piece, MoveResult<Board,Boolean,SideColor> move, Coordinate toSquare) {
         Board moveBoard = move.successfulResult();
-        if (checkForCheckMate.check(moveBoard,piece.getColor(),moveBoard.getPieces(),checkForCheck))
+        if (checkForCheckMate.check(moveBoard,piece.getColor(),moveBoard.getPieces()))
             return new MoveResult<>(moveBoard, true,getOpositeColor(piece.getColor()), "CheckMate");
-        if (checkForCheck.check(moveBoard,piece.getColor(),piece, toSquare))
-            return new MoveResult<>(board, true,getOpositeColor(piece.getColor()), "Check Rule unfollowed");
         else
             return move;
     }

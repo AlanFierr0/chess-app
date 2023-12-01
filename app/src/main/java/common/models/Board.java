@@ -87,10 +87,14 @@ public class Board {
     }
 
     public boolean checkForPieceInSquare(Coordinate coordinate) {
-        if (coordinate.row() > row || coordinate.column() > column || coordinate.row() < 1 || coordinate.column() < 1) {
+        if (isOutOfBounds(coordinate)) {
             return false;
         }
         return !Objects.equals(getSquare(coordinate).getPiece().getName(), "null");
+    }
+
+    private boolean isOutOfBounds(Coordinate coordinate) {
+        return coordinate.row() > row || coordinate.column() > column || coordinate.row() < 1 || coordinate.column() < 1;
     }
 
     public int getColumns() {

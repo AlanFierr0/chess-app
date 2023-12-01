@@ -16,12 +16,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BishopTest {
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
+
     Game game;
+
     @BeforeEach
     public void setup() {
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
+
         List<Move> bishopMovements = new ArrayList<>();
         bishopMovements.add(new DiagonalMove());
         whitePieces.add(pieceFactory.createPiece("bishop", new Coordinate(1, 2), bishopMovements, false, SideColor.White));

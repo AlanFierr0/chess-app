@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KingTest {
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
     Game game;
     @BeforeEach
     void setup(){
-    List<Move> kingMovements = new ArrayList<>();
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
+        List<Move> kingMovements = new ArrayList<>();
         kingMovements.add(new VerticalMove(1, true));
         kingMovements.add(new HorizontalMove(1));
         kingMovements.add(new DiagonalMove(1, 1,true));

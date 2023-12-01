@@ -15,13 +15,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class QueenTest {
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
     Game game;
 
     @BeforeEach
     public void setup() {
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
+
         List<Move> queenMovements = new ArrayList<>();
         queenMovements.add(new VerticalMove(true));
         queenMovements.add(new HorizontalMove());

@@ -17,14 +17,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PawnTest {
-
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
     Game game;
 
     @BeforeEach
     void setup(){
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
         List<Move> pawnMovements = new ArrayList<>();
         pawnMovements.add(new VerticalMove(1, false));
         pawnMovements.add(new VerticalMove(2, false));

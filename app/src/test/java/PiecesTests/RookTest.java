@@ -16,12 +16,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class RookTest {
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
     Game game;
     @BeforeEach
     public void setup(){
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
         List<Move> rookMovements = new ArrayList<>();
         rookMovements.add(new VerticalMove( true));
         rookMovements.add(new HorizontalMove());

@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightTest {
 
-    List<Piece> blackPieces = new ArrayList<>();
-    List<Piece> whitePieces = new ArrayList<>();
-    PieceFactory pieceFactory = new PieceFactory();
     Game game;
 
     @BeforeEach
     public void setup() {
+        List<Piece> blackPieces = new ArrayList<>();
+        List<Piece> whitePieces = new ArrayList<>();
+        PieceFactory pieceFactory = new PieceFactory();
         List<Move> knightMovements = new ArrayList<>();
         knightMovements.add(new JumpMove(2, 1));
         knightMovements.add(new JumpMove(2, -1));

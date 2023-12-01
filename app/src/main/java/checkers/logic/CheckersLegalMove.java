@@ -46,7 +46,7 @@ public class CheckersLegalMove implements LegalMove {
     }
 
     private Coordinate canContinueToEat(Piece piece, Board board, Coordinate toSquare) {
-        List<Coordinate> possibleMoves = new ArrayList<>(possibleMovements.getPossibleMovements(board, piece, board.getSquareOfPiece(piece).successfulResult().get()));
+        List<Coordinate> possibleMoves = new ArrayList<>(possibleMovements.getPossibleMovements(board, piece, board.getCoordOfPiece(piece).successfulResult().get()));
         for (Coordinate possibleMove : possibleMoves) {
             if (checkIfPossible(piece, board, possibleMove)) {
                 return possibleMove;
@@ -59,7 +59,7 @@ public class CheckersLegalMove implements LegalMove {
         List<PossibleMovement> possibleMoves = new ArrayList<>();
         for (Piece piece1 : board.getCurrentPieces()) {
             if (piece1.getColor() == piece.getColor())
-                for (Coordinate possibleMove : possibleMovements.getPossibleMovements(board, piece1, board.getSquareOfPiece(piece1).successfulResult().get())) {
+                for (Coordinate possibleMove : possibleMovements.getPossibleMovements(board, piece1, board.getCoordOfPiece(piece1).successfulResult().get())) {
                     possibleMoves.add(new PossibleMovement(possibleMove, piece1));
                 }
         }
@@ -78,7 +78,7 @@ public class CheckersLegalMove implements LegalMove {
 
     private boolean checkIfPossible(Piece piece, Board board, Coordinate possibleMove) {
         for (Move move : piece.getEatMovements()) {
-            if (move.checkMove(board.getSquareOfPiece(piece).successfulResult().get(), possibleMove, board, piece.getColor()).outputResult() && board.checkForPieceInSquare(possibleMove)) {
+            if (move.checkMove(board.getCoordOfPiece(piece).successfulResult().get(), possibleMove, board, piece.getColor()).outputResult() && board.checkForPieceInSquare(possibleMove)) {
                 return true;
             }
         }

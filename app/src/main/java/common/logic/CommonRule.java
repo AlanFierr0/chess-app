@@ -27,7 +27,7 @@ public class CommonRule {
     }
 
     private boolean isNotSamePlace(Board board, Piece piece, Coordinate toSquare) {
-        return toSquare.column() == board.getSquareOfPiece(piece).successfulResult().get().column() && toSquare.row() == board.getSquareOfPiece(piece).successfulResult().get().row();
+        return toSquare.column() == board.getCoordOfPiece(piece).successfulResult().get().column() && toSquare.row() == board.getCoordOfPiece(piece).successfulResult().get().row();
     }
 
     private boolean isInBoard(Board board, Coordinate toSquare) {

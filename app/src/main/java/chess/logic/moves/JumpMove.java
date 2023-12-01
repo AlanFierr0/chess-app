@@ -27,14 +27,4 @@ public class JumpMove implements Move {
         return finalSquare.column() == initialSquare.column() + columnIncremented && finalSquare.row() == initialSquare.row() + rowsIncremented;
     }
 
-    @Override
-    public int getRowsIncremented() {
-        return rowsIncremented;
-    }
-
-    @Override
-    public int getColumnIncremented() {
-        return columnIncremented;
-    }
-
 }

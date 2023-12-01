@@ -52,13 +52,4 @@ public class CheckersEatMove implements Move {
     private Boolean checkSide(SideColor color) {
         return color == SideColor.White;
     }
-    @Override
-    public int getRowsIncremented() {
-        return 0;
-    }
-
-    @Override
-    public int getColumnIncremented() {
-        return 0;
-    }
 }

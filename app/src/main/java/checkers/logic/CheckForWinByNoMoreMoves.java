@@ -13,7 +13,7 @@ public class CheckForWinByNoMoreMoves {
             if (color != getOpositeColor(p.getColor())) {
                 continue;
             }
-            if (!possibleMovements.getPossibleMovements(board, p, board.getSquareOfPiece(p).successfulResult().get()).isEmpty()) {
+            if (!possibleMovements.getPossibleMovements(board, p, board.getCoordOfPiece(p).successfulResult().get()).isEmpty()) {
                 return false;
             }
         }

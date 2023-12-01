@@ -79,16 +79,6 @@ public class DiagonalMove implements Move {
         }
     }
 
-    @Override
-    public int getRowsIncremented() {
-        return rowsIncremented;
-    }
-
-    @Override
-    public int getColumnIncremented() {
-        return columnIncremented;
-    }
-
 
     public boolean isDiagonalClear(Board board, Coordinate initialSquare, Coordinate finalSquare) {
         int rowsCount = Integer.compare(finalSquare.row(), initialSquare.row());

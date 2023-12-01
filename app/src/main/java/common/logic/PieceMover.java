@@ -14,7 +14,7 @@ public class PieceMover {
         for (Move move : movements) {
             CheckResult<Coordinate, Boolean> checkResult = move.checkMove(initial, toSquare, board, pieceMoving.getColor());
             if (checkResult.outputResult()) {
-                Optional<Coordinate> coordinateEaten = board.getSquareOfPiece(pieceEaten).successfulResult();
+                Optional<Coordinate> coordinateEaten = board.getCoordOfPiece(pieceEaten).successfulResult();
                 Board b = board.positionPiece(board.getPieceBuilder().createNullPiece(coordinateEaten.get()), coordinateEaten.get());
                 Board newBoard = b.positionPiece(pieceMoving, checkResult.successfulResult());
                 Board newBoard2 = newBoard.positionPiece(board.getPieceBuilder().createNullPiece(initial), initial);

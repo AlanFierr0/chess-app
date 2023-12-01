@@ -17,10 +17,10 @@ public class CheckForCheckMate {
             SideColor oppositeColor = color == SideColor.White ? SideColor.Black : SideColor.White;
             for (Piece piece : pieces) {
                 if (piece.getColor() == oppositeColor) {
-                    if (board.getSquareOfPiece(piece).successfulResult().isEmpty()) {
+                    if (board.getCoordOfPiece(piece).successfulResult().isEmpty()) {
                         continue;
                     }
-                    Coordinate initialSquare = board.getSquareOfPiece(piece).successfulResult().get();
+                    Coordinate initialSquare = board.getCoordOfPiece(piece).successfulResult().get();
                     List<Coordinate> possibleMoves = possibleMovements.getPossibleMovements(board,piece, initialSquare);
                     for (Coordinate possibleMove : possibleMoves) {
                         if(!moveValidation.validateMove(piece, board,possibleMove, initialSquare)){

@@ -56,23 +56,32 @@ public class Board {
     }
 
 
-    public GetResult<Coordinate,Boolean> getSquareOfPiece(Piece piece) {
+    public GetResult<Coordinate> getCoordOfPiece(Piece piece) {
         for (Square square : squares) {
             Piece squarePiece = square.getPiece();
             if (piece.getId() == squarePiece.getId()) {
-                return new GetResult<>(Optional.of(square.getCoordinate()),false);
+                return new GetResult<>(Optional.of(square.getCoordinate()));
             }
         }
-        return new GetResult<>(Optional.empty(),true);
+        return new GetResult<>(Optional.empty());
     }
 
-    public GetResult<Piece,Boolean> findImportantPiece(SideColor color){
-        for(Piece p : pieces){
-            if(p.isImportant() && p.getColor() == color){
-                return new GetResult<>(Optional.of(p),false);
+    public GetResult<Piece> getPiece(Coordinate coord){
+        for(Square square : squares){
+            if(square.getCoordinate().equals(coord)){
+                return new GetResult<>(Optional.of(square.getPiece()));
             }
         }
-        return new GetResult<>(Optional.empty(),true);
+        return new GetResult<>(Optional.empty());
+    }
+
+    public GetResult<Piece> findImportantPiece(SideColor color){
+        for(Piece p : pieces){
+            if(p.isImportant() && p.getColor() == color){
+                return new GetResult<>(Optional.of(p));
+            }
+        }
+        return new GetResult<>(Optional.empty());
     }
 
     public Square getSquare(Coordinate coordinate) {

@@ -17,7 +17,7 @@ public class PieceFactory {
         this.movements = movements;
         this.eatMovements = eatMovements;
         this.isImportant = isImportant;
-        Piece newPiece = new Piece(pieceName, coordinate, movements, eatMovements, color, isImportant, id);
+        Piece newPiece = new Piece(pieceName, coordinate, movements, eatMovements, color, isImportant,this.id);
         pieces.add(newPiece);
         this.id ++;
         return newPiece;
@@ -28,7 +28,7 @@ public class PieceFactory {
         this.eatMovements = movements;
         this.isImportant = isImportant;
         this.id ++;
-        Piece newPiece = new Piece(pieceName, coordinate, movements, color, isImportant, id);
+        Piece newPiece = new Piece(pieceName, coordinate, movements, color, isImportant, this.id);
         pieces.add(newPiece);
         return newPiece;
     }
@@ -42,12 +42,11 @@ public class PieceFactory {
                 return new Piece(pieceName, coordinate, movements, eatMovements, color, isImportant, id);
             }
         }
-         return null;
+         return createNullPiece(coordinate);
      }
 
      public Piece createNullPiece(Coordinate coordinate){
-        this.id++;
-        return new Piece("null", coordinate, new ArrayList<>(), new ArrayList<>(), SideColor.NULL, false, id);
+        return new Piece("null", coordinate, new ArrayList<>(), new ArrayList<>(), SideColor.NULL, false, 0);
      }
 
     public Piece promotePawn(Coordinate toSquare, SideColor color, int id) {
@@ -59,6 +58,6 @@ public class PieceFactory {
                 return new Piece("queen", toSquare, movements, eatMovements, color, isImportant, id);
             }
         }
-        return null;
+        return createNullPiece(toSquare);
     }
 }

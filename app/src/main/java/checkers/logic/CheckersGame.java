@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckersGame {
-    public static Game CreateGame() {
+    public Game CreateGame() {
         Player player1 = new Player();
         Player player2 = new Player();
         List<Piece> blackPieces = new ArrayList<>();

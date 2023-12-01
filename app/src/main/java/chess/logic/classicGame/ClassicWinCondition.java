@@ -22,7 +22,8 @@ public class ClassicWinCondition implements WinCondition {
     private SideColor getOpositeColor(SideColor color) {
         if (color == SideColor.White)
             return SideColor.Black;
-        else
+        if (color == SideColor.Black)
             return SideColor.White;
+        return color;
     }
 }

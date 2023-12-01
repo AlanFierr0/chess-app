@@ -32,9 +32,10 @@ public class PossibleMovements {
                         if (followCheckMoveAndCommonMove(board, piece, initialSquare, move, finalSquare))
                             if(!checkDuplicated(possibleMoves, finalSquare))
                                 possibleMoves.add(finalSquare);
-                } else if (followCheckMoveAndCommonMove(board, piece, initialSquare, move, finalSquare)) {
-                    if(!checkDuplicated(possibleMoves, finalSquare))
-                        possibleMoves.add(finalSquare);
+                } else if (!isNotNull(board, finalSquare))
+                    if(followCheckMoveAndCommonMove(board, piece, initialSquare, move, finalSquare)) {
+                        if (!checkDuplicated(possibleMoves, finalSquare))
+                            possibleMoves.add(finalSquare);
                 }
             }
         }

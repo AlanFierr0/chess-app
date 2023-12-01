@@ -4,10 +4,7 @@ import common.logic.LegalMove;
 import common.logic.PieceMover;
 import common.logic.PossibleMovements;
 import common.logic.WinCondition;
-import common.models.Board;
-import common.models.Coordinate;
-import common.models.Piece;
-import common.models.SideColor;
+import common.models.*;
 import common.moves.Move;
 import common.results.MoveResult;
 
@@ -59,13 +56,15 @@ public class CheckersLegalMove implements LegalMove {
     }
 
     private boolean canEatRule(Piece piece, Board board, Coordinate toSquare) {
-        List<Coordinate> possibleMoves = new ArrayList<>();
+        List<PossibleMovement> possibleMoves = new ArrayList<>();
         for (Piece piece1 : board.getCurrentPieces()) {
             if (piece1.getColor() == piece.getColor())
-                possibleMoves.addAll(possibleMovements.getPossibleMovements(board, piece1, board.getSquareOfPiece(piece1).successfulResult().get()));
+                for (Coordinate possibleMove : possibleMovements.getPossibleMovements(board, piece1, board.getSquareOfPiece(piece1).successfulResult().get())) {
+                    possibleMoves.add(new PossibleMovement(possibleMove, piece1));
+                }
         }
-        for (Coordinate possibleMove : possibleMoves) {
-            if (isNotEatingWhenPossible(piece, board, toSquare, possibleMove)) {
+        for (PossibleMovement possibleMove : possibleMoves) {
+            if (isNotEatingWhenPossible(possibleMove.piece(), board, toSquare,possibleMove.coord())) {
                 return true;
             }
         }

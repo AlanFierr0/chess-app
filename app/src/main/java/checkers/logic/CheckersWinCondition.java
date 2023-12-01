@@ -17,7 +17,7 @@ public class CheckersWinCondition implements WinCondition {
         if (CheckForWinByNoMorePieces.check(moveBoard, piece.getColor())) {
             return new MoveResult<>(moveBoard, true,getOpositeColor(piece.getColor()), "CheckMate");
         }
-        if (CheckForWinByNoMoreMoves.check(moveBoard)) {
+        if (CheckForWinByNoMoreMoves.check(moveBoard, piece.getColor())) {
             return new MoveResult<>(moveBoard, true,getOpositeColor(piece.getColor()), "CheckMate");
         } else
             return move;
@@ -26,7 +26,8 @@ public class CheckersWinCondition implements WinCondition {
     private SideColor getOpositeColor(SideColor color) {
         if (color == SideColor.White)
             return SideColor.Black;
-        else
+        if (color == SideColor.Black)
             return SideColor.White;
+        return color;
     }
 }

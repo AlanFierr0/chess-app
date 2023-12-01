@@ -29,7 +29,8 @@ public class ChessLegalMove implements LegalMove {
     private SideColor getOpositeColor(SideColor color) {
         if (color == SideColor.White)
             return SideColor.Black;
-        else
+        if (color == SideColor.Black)
             return SideColor.White;
+        return color;
     }
 }

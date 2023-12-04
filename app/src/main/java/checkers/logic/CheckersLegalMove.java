@@ -56,14 +56,14 @@ public class CheckersLegalMove implements LegalMove {
     }
 
     private boolean canEatRule(Piece piece, Board board, Coordinate toSquare) {
-        List<PossibleMovement> possibleMoves = new ArrayList<>();
+        List<PieceCoord> possibleMoves = new ArrayList<>();
         for (Piece piece1 : board.getCurrentPieces()) {
             if (piece1.getColor() == piece.getColor())
                 for (Coordinate possibleMove : possibleMovements.getPossibleMovements(board, piece1, board.getCoordOfPiece(piece1).successfulResult().get())) {
-                    possibleMoves.add(new PossibleMovement(possibleMove, piece1));
+                    possibleMoves.add(new PieceCoord(possibleMove, piece1));
                 }
         }
-        for (PossibleMovement possibleMove : possibleMoves) {
+        for (PieceCoord possibleMove : possibleMoves) {
             if (isNotEatingWhenPossible(possibleMove.piece(), board, toSquare,possibleMove.coord())) {
                 return true;
             }

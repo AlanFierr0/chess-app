@@ -2,10 +2,7 @@ package chess.logic.classicGame;
 
 import common.logic.MoveValidation;
 import common.logic.PossibleMovements;
-import common.models.Board;
-import common.models.Coordinate;
-import common.models.Piece;
-import common.models.SideColor;
+import common.models.*;
 
 import java.util.List;
 
@@ -13,10 +10,10 @@ public class CheckForCheckMate {
         private final MoveValidation moveValidation = new MoveValidation();
         private final PossibleMovements possibleMovements = new PossibleMovements();
         private final CheckForCheck checkForCheck = new CheckForCheck();
-        public Boolean check(Board board, SideColor color, List<Piece> pieces){
+        public Boolean check(Board board, SideColor color, List<PieceCoord> pieces){
             SideColor oppositeColor = color == SideColor.White ? SideColor.Black : SideColor.White;
-            for (Piece piece : pieces) {
-                if (checkEachValidPossibleMove(board, piece, oppositeColor))
+            for (PieceCoord pieceCoord : pieces) {
+                if (checkEachValidPossibleMove(board, pieceCoord.piece(), oppositeColor))
                     return false;
             }
             return true;

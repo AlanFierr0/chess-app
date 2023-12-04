@@ -1,5 +1,6 @@
 package common.models;
 
+import common.logic.CommonRule;
 import common.logic.LegalMove;
 import common.logic.WinCondition;
 import common.results.MoveResult;
@@ -18,9 +19,9 @@ public class Game {
     private final LegalMove legalMove;
 
 
-    public Game(Player player1, Player player2, Board board, SideColor startingPlayer, WinCondition winCondition, LegalMove legalMove) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public Game(Board board, SideColor startingPlayer, WinCondition winCondition, LegalMove legalMove) {
+        this.player1 = new Player();
+        this.player2 = new Player();
         this.boardStack.push(board);
         this.turnHandler = new TurnHandler(startingPlayer);
         this.winCondition = winCondition;
@@ -46,7 +47,7 @@ public class Game {
             return new MoveResult<>(boardStack.peek(), true,turnHandler.getTurn(), "Piece not found");
         }
         if(piece.getColor().equals(turnHandler.getTurn())) {
-            MoveResult<Board,Boolean,SideColor> res = piece.movePiece(initial,toSquare, boardStack.peek(),winCondition, legalMove);
+            MoveResult<Board,Boolean,SideColor> res = movePiece(initial,toSquare, boardStack.peek(),winCondition, legalMove);
             if (res.errorResult()) {
                 return new MoveResult<>(boardStack.peek(), true, turnHandler.getTurn(), res.message());
             }
@@ -72,4 +73,24 @@ public class Game {
         return turnHandler;
     }
 
+    public MoveResult<Board, Boolean, SideColor> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, LegalMove LegalMove) {
+        Piece piece = board.getPiece(initial).successfulResult().get();
+        if (notFollowsCommonRule(piece,toSquare, board)) {
+            return new MoveResult<>(board, true,piece.getColor(), "Common Rule unfollowed");
+        }
+        if (isNotNull(toSquare, board)) {
+            return LegalMove.movePiece(piece,toSquare, board, initial, piece.getEatMovements(),winCondition);
+        } else {
+            return LegalMove.movePiece(piece,toSquare, board, initial, piece.getMovements(),winCondition);
+        }
+    }
+
+    private boolean isNotNull(Coordinate toSquare, Board board) {
+        return !Objects.equals(board.getPiece(toSquare).successfulResult().get().getName(), "null");
+    }
+
+    private boolean notFollowsCommonRule(Piece piece,Coordinate toSquare, Board board) {
+        CommonRule commonRule = new CommonRule();
+        return !commonRule.checkRule(board, piece, toSquare);
+    }
 }

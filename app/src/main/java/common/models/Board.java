@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public class Board {
     private final Square[] squares;
-    private final List<Piece> pieces;
+    private final List<PieceCoord> pieces;
     private final int column;
     private final int row;
     private final List<MovementHistory> movements;
     PieceFactory pieceFactory;
 
-    public Board(int row, int column, List<Piece> blackPieces, List<Piece> whitePieces, PieceFactory pieceFactory) {
+    public Board(int row, int column, List<PieceCoord> blackPieces, List<PieceCoord> whitePieces, PieceFactory pieceFactory) {
         squares = new Square[row * column];
         whitePieces.addAll(blackPieces);
         this.pieces = whitePieces;
@@ -27,18 +27,18 @@ public class Board {
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column; j++) {
                 int index = (i - 1) * column + j - 1;
-                squares[index] = new Square(new Coordinate(j, i), pieceFactory.createNullPiece(new Coordinate(j, i)));
+                squares[index] = new Square(new Coordinate(j, i), pieceFactory.createNullPiece());
             }
         }
-        for (Piece piece : whitePieces) {
-            int initialRow = piece.getInitialSquare().row();
-            int initialColumn = piece.getInitialSquare().column();
+        for (PieceCoord piece : whitePieces) {
+            int initialRow = piece.coord().row();
+            int initialColumn = piece.coord().column();
             int index = (initialRow - 1) * column + initialColumn - 1;
             Square square = squares[index];
-            square.setPiece(piece);
+            square.setPiece(piece.piece());
         }
     }
-    public Board(int row, int column, List<Piece> pieces, Square[] squares, List<MovementHistory> movements, PieceFactory pieceFactory) {
+    public Board(int row, int column, List<PieceCoord> pieces, Square[] squares, List<MovementHistory> movements, PieceFactory pieceFactory) {
         this.row = row;
         this.column = column;
         this.squares = squares;
@@ -76,9 +76,9 @@ public class Board {
     }
 
     public GetResult<Piece> findImportantPiece(SideColor color){
-        for(Piece p : pieces){
-            if(p.isImportant() && p.getColor() == color){
-                return new GetResult<>(Optional.of(p));
+        for(PieceCoord p : pieces){
+            if(p.piece().isImportant() && p.piece().getColor() == color){
+                return new GetResult<>(Optional.of(p.piece()));
             }
         }
         return new GetResult<>(Optional.empty());
@@ -103,7 +103,7 @@ public class Board {
         return column;
     }
 
-    public List<Piece> getPieces() {
+    public List<PieceCoord> getPieces() {
         return pieces;
     }
 

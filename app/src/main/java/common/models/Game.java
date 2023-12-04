@@ -41,7 +41,7 @@ public class Game {
     }
 
     public MoveResult<Board,Boolean,SideColor> movePiece(Coordinate initial, Coordinate toSquare) {
-        Piece piece = boardStack.peek().getSquare(initial).getPiece();
+        Piece piece = boardStack.peek().getPiece(initial).successfulResult().get();
         if (isNotNull(piece)) {
             return new MoveResult<>(boardStack.peek(), true,turnHandler.getTurn(), "Piece not found");
         }
@@ -72,10 +72,4 @@ public class Game {
         return turnHandler;
     }
 
-    public Player getCurrentPlayer() {
-        if (turnHandler.turn() == player1.getColor()) {
-            return player1;
-        }
-        return player2;
-    }
 }

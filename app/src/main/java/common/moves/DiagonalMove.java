@@ -104,5 +104,4 @@ public class DiagonalMove implements Move {
             rowTemp *= -1;
         }
     }
-
 }

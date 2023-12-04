@@ -27,6 +27,6 @@ public class MoveValidation {
     }
 
     private static boolean isNotNull(Board board, Coordinate possibleMove) {
-        return Objects.equals(board.getSquare(possibleMove).getPiece().getName(), "null");
+        return Objects.equals(board.getPiece(possibleMove).successfulResult().get().getName(), "null");
     }
 }

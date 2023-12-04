@@ -84,13 +84,6 @@ public class Board {
         return new GetResult<>(Optional.empty());
     }
 
-    public Square getSquare(Coordinate coordinate) {
-        int adjustedRow = coordinate.row() - 1;
-        int adjustedColumn = coordinate.column() - 1;
-        int index = this.column * adjustedRow + adjustedColumn;
-        return squares[index];
-    }
-
     public int getRows() {
         return row;
     }
@@ -99,7 +92,7 @@ public class Board {
         if (isOutOfBounds(coordinate)) {
             return false;
         }
-        return !Objects.equals(getSquare(coordinate).getPiece().getName(), "null");
+        return !Objects.equals(getPiece(coordinate).successfulResult().get().getName(), "null");
     }
 
     private boolean isOutOfBounds(Coordinate coordinate) {

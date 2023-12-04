@@ -19,11 +19,11 @@ public class CommonRule {
     }
 
     private boolean isNotSameColor(Board board, Piece piece, Coordinate toSquare) {
-        return !Objects.equals(board.getSquare(toSquare).getPiece().getColor(), piece.getColor());
+        return !Objects.equals(board.getPiece(toSquare).successfulResult().get().getColor(), piece.getColor());
     }
 
     private boolean isNotNull(Board board, Coordinate toSquare) {
-        return Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null");
+        return Objects.equals(board.getPiece(toSquare).successfulResult().get().getName(), "null");
     }
 
     private boolean isNotSamePlace(Board board, Piece piece, Coordinate toSquare) {

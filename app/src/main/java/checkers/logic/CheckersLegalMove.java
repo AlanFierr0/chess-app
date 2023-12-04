@@ -24,7 +24,7 @@ public class CheckersLegalMove implements LegalMove {
         if (canEatRule(piece, board, toSquare)) {
             return new MoveResult<>(board, true,piece.getColor(), "always eat Rule unfollowed");
         }
-        MoveResult<Board, Boolean, SideColor> move = pieceMover.check(board, initial, toSquare, moves, piece, board.getSquare(toSquare).getPiece());
+        MoveResult<Board, Boolean, SideColor> move = pieceMover.check(board, initial, toSquare, moves, piece, board.getPiece(toSquare).successfulResult().get());
         if (move.errorResult())
             return move;
         else {
@@ -36,7 +36,7 @@ public class CheckersLegalMove implements LegalMove {
     }
 
     private boolean hasEaten(Piece piece,Coordinate toSquare, Board board) {
-        SideColor color = board.getSquare(toSquare).getPiece().getColor();
+        SideColor color = board.getPiece(toSquare).successfulResult().get().getColor();
         if (color == SideColor.Black)
             return piece.getColor() == SideColor.White;
         else if (color == SideColor.White)

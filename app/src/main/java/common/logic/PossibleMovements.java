@@ -46,7 +46,7 @@ public class PossibleMovements {
     }
 
     private boolean isNotNull(Board board, Coordinate finalSquare) {
-        return !Objects.equals(board.getSquare(finalSquare).getPiece().getName(), "null");
+        return !Objects.equals(board.getPiece(finalSquare).successfulResult().get().getName(), "null");
     }
 
     private Boolean checkDuplicated(List<Coordinate> possibleMoves, Coordinate finalSquare) {

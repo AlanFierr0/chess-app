@@ -13,7 +13,7 @@ public class FirstToEat implements WinCondition {
 
     @Override
     public MoveResult<Board, Boolean, SideColor> checkWin(Board board, Piece piece, MoveResult<Board, Boolean, SideColor> move, Coordinate toSquare) {
-        if (!Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null")) {
+        if (!Objects.equals(board.getPiece(toSquare).successfulResult().get().getName(), "null")) {
             return new MoveResult<>(move.successfulResult(), true,getOpositeColor(piece.getColor()), "CheckMate");
         }
         else return move;

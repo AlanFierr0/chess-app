@@ -17,7 +17,7 @@ public class ChessLegalMove implements LegalMove {
     private final CheckForCheck checkForCheck = new CheckForCheck();
     @Override
     public MoveResult<Board, Boolean, SideColor> movePiece(Piece piece, Coordinate toSquare, Board board, Coordinate initial, List<Move> moves, WinCondition winCondition) {
-        MoveResult<Board, Boolean, SideColor> move = pieceMover.check(board, initial, toSquare, moves,piece, board.getSquare(toSquare).getPiece());
+        MoveResult<Board, Boolean, SideColor> move = pieceMover.check(board, initial, toSquare, moves,piece, board.getPiece(toSquare).successfulResult().get());
         if (move.errorResult())
             return move;
         else {

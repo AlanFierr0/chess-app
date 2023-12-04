@@ -50,7 +50,7 @@ public class Piece{
     }
 
     private boolean isNotNull(Coordinate toSquare, Board board) {
-        return !Objects.equals(board.getSquare(toSquare).getPiece().getName(), "null");
+        return !Objects.equals(board.getPiece(toSquare).successfulResult().get().getName(), "null");
     }
 
     private boolean notFollowsCommonRule(Coordinate toSquare, Board board) {

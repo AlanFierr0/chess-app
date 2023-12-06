@@ -14,24 +14,27 @@ public class PieceMover {
         for (Move move : movements) {
             CheckResult<Coordinate, Boolean> checkResult = move.checkMove(initial, toSquare, board, pieceMoving.getColor());
             if (checkResult.outputResult()) {
-                Optional<Coordinate> coordinateEaten = board.getCoordOfPiece(pieceEaten).successfulResult();
-                Board b = board.positionPiece(board.getPieceBuilder().createNullPiece(), coordinateEaten.get());
-                Board newBoard = b.positionPiece(pieceMoving, checkResult.successfulResult());
-                Board newBoard2 = newBoard.positionPiece(board.getPieceBuilder().createNullPiece(), initial);
-                if (pawnReachedEnd(pieceMoving, checkResult.successfulResult(), board)) {
-                    newBoard2 = newBoard2.positionPiece(board.getPieceBuilder().promotePawn(pieceMoving.getColor(), pieceMoving.getId()), checkResult.successfulResult());
-                }
-                List<MovementHistory> newMovement = new ArrayList<>(board.getMovements());
-                MovementHistory movement = new MovementHistory(initial, checkResult.successfulResult(), pieceMoving);
-                newMovement.add(movement);
-
-                Board boa = new Board(board.getRows(), board.getColumns(), newBoard2.getPieces(), newBoard2.getSquares(), newMovement, board.getPieceBuilder());
-                return new MoveResult<>(boa, false, chekcOpositeColor(pieceMoving), "Piece Moved");
+                Board newBoard = modifyBoard(board, initial, toSquare, pieceMoving, pieceEaten, checkResult);
+                return new MoveResult<>(newBoard, false, chekcOpositeColor(pieceMoving), "Piece Moved");
             }
         }
         return new MoveResult<>(board, true,pieceMoving.getColor(), "Piece not moved");
     }
 
+    private Board modifyBoard(Board board, Coordinate initial, Coordinate toSquare, Piece pieceMoving, Piece pieceEaten, CheckResult<Coordinate, Boolean> checkResult) {
+        Optional<Coordinate> coordinateEaten = board.getCoordOfPiece(pieceEaten).successfulResult();
+        Board b = board.positionPiece(board.getPieceBuilder().createNullPiece(), coordinateEaten.get());
+        Board newBoard = b.positionPiece(pieceMoving, checkResult.successfulResult());
+        Board newBoard2 = newBoard.positionPiece(board.getPieceBuilder().createNullPiece(), initial);
+        if (pawnReachedEnd(pieceMoving, checkResult.successfulResult(), board)) {
+            newBoard2 = newBoard2.positionPiece(board.getPieceBuilder().promotePawn(pieceMoving.getColor(), pieceMoving.getId()), checkResult.successfulResult());
+        }
+        List<MovementHistory> newMovement = new ArrayList<>(board.getMovements());
+        MovementHistory movement = new MovementHistory(initial, checkResult.successfulResult(), pieceMoving);
+        newMovement.add(movement);
+        Board boa = new Board(board.getRows(), board.getColumns(), newBoard2.getPieces(), newBoard2.getSquares(), newMovement, board.getPieceBuilder());
+        return boa;
+    }
     private SideColor chekcOpositeColor(Piece pieceMoving) {
         if (pieceMoving.getColor().equals(SideColor.Black)) {
             return SideColor.White;

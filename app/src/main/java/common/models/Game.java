@@ -20,8 +20,8 @@ public class Game {
 
 
     public Game(Board board, SideColor startingPlayer, WinCondition winCondition, LegalMove legalMove) {
-        this.player1 = new Player();
-        this.player2 = new Player();
+        this.player1 = new Player(SideColor.White);
+        this.player2 = new Player(SideColor.Black);
         this.boardStack.push(board);
         this.turnHandler = new TurnHandler(startingPlayer);
         this.winCondition = winCondition;
@@ -60,19 +60,6 @@ public class Game {
         }
     }
 
-    private boolean isNotNull(Piece piece) {
-        return Objects.equals(piece.getName(), "null");
-    }
-
-
-    public Board getBoard() {
-        return boardStack.peek();
-    }
-
-    public TurnHandler getTurnHandler() {
-        return turnHandler;
-    }
-
     public MoveResult<Board, Boolean, SideColor> movePiece(Coordinate initial, Coordinate toSquare, Board board, WinCondition winCondition, LegalMove LegalMove) {
         Piece piece = board.getPiece(initial).successfulResult().get();
         if (notFollowsCommonRule(piece,toSquare, board)) {
@@ -92,5 +79,19 @@ public class Game {
     private boolean notFollowsCommonRule(Piece piece,Coordinate toSquare, Board board) {
         CommonRule commonRule = new CommonRule();
         return !commonRule.checkRule(board, piece, toSquare);
+    }
+
+
+    private boolean isNotNull(Piece piece) {
+        return Objects.equals(piece.getName(), "null");
+    }
+
+
+    public Board getBoard() {
+        return boardStack.peek();
+    }
+
+    public TurnHandler getTurnHandler() {
+        return turnHandler;
     }
 }

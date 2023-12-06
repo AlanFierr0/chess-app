@@ -21,27 +21,28 @@ public class PawnTest {
 
     @BeforeEach
     void setup(){
-        List<Piece> blackPieces = new ArrayList<>();
-        List<Piece> whitePieces = new ArrayList<>();
+        List<PieceCoord> blackPieces = new ArrayList<>();
+        List<PieceCoord> whitePieces = new ArrayList<>();
         PieceFactory pieceFactory = new PieceFactory();
         List<Move> pawnMovements = new ArrayList<>();
         pawnMovements.add(new VerticalMove(1, false));
         pawnMovements.add(new VerticalMove(2, false));
-        whitePieces.add(pieceFactory.createPiece("pawn", new Coordinate(1, 2), pawnMovements, false, SideColor.White));
-        whitePieces.add(pieceFactory.clonePiece("pawn", new Coordinate(5, 1), SideColor.Black));
-        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(6, 2), SideColor.Black));
-        blackPieces.add(pieceFactory.clonePiece("pawn", new Coordinate(1, 7), SideColor.Black));
+        whitePieces.add(new PieceCoord(new Coordinate(1, 2),pieceFactory.createPiece("pawn", pawnMovements, false, SideColor.White)));
+        whitePieces.add(new PieceCoord(new Coordinate(5, 1),pieceFactory.clonePiece("pawn", SideColor.White)));
+        blackPieces.add(new PieceCoord(new Coordinate(6, 2),pieceFactory.clonePiece("pawn", SideColor.Black)));
+        blackPieces.add(new PieceCoord(new Coordinate(1, 7),pieceFactory.clonePiece("pawn", SideColor.Black)));
 
         List<Move> kingMovements = new ArrayList<>();
         kingMovements.add(new VerticalMove(1, true));
         kingMovements.add(new HorizontalMove(1));
         kingMovements.add(new DiagonalMove(1, 1,true));
         kingMovements.add(new DiagonalMove(1, -1,true));
-        whitePieces.add(pieceFactory.createPiece("king", new Coordinate(5, 1), kingMovements, true, SideColor.White));
-        blackPieces.add(pieceFactory.clonePiece("king", new Coordinate(5, 8), SideColor.Black));
+        whitePieces.add(new PieceCoord(new Coordinate(5, 1),pieceFactory.createPiece("king", kingMovements, true, SideColor.White)));
+        blackPieces.add(new PieceCoord(new Coordinate(5, 8),pieceFactory.clonePiece("king", SideColor.Black)));
+
 
         Board board = new Board(8,8,blackPieces,whitePieces,pieceFactory);
-        game = new Game(new Player(), new Player(), board, SideColor.White,new ClassicWinCondition(), new ChessLegalMove());
+        game = new Game(board, SideColor.White,new ClassicWinCondition(), new ChessLegalMove());
     }
     @Test
     void TestIfPawnCanMoveDiagonalWithoutEating() {
